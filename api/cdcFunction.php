@@ -98,13 +98,13 @@ function fe(
 
 function calculateFactor(
     bool $hasDownPayment, 
-    int $numInstallments, 
+    int $numberOfInstallments, 
     float $financingCoefficient, 
     float $interestRate): float 
 {
     $g = $numberOfInstallments*$financingCoefficient;
 
-    if(g == 0){
+    if($g == 0){
         throw new InvalidArgumentException("Division by ZERO");
     }
 
