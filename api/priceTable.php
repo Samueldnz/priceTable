@@ -218,7 +218,7 @@ $financingCoefficient;
 $paymentAmount;
 
 if($interestRate != 0 && $finalValue == 0){
-    $interestRate = $interestRate / 100;
+    $interestRate /= 100;
 }else{
     $interestRate = calculateInterestRate($presentValue, $finalValue, $numberOfInstallments, $hasDownPayment);
 }
