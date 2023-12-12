@@ -87,7 +87,7 @@ function buildRightBoxHTML(
     $discount = (($finalValue - $presentValue)/$finalValue) * 100;
     $discount = numberToFixed($discount,2);
 
-    $appliedFactor = toString(calculateFactor($hasDownPayment, $financingCoefficient, $numberOfInstallments, $interestRate), 6);
+    $appliedFactor = toString(calculateFactor($hasDownPayment, $numberOfInstallments, $financingCoefficient, $interestRate), 6);
 
     return "
     <p><b>Prestação:</b> $ {$paymentAmount}</p>
