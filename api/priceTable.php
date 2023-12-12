@@ -50,7 +50,7 @@ function getRightBoxHTMLText(float $cashPrice, float $futurePrice, int $numInsta
     $embeddedInterest = numberToFixed($embeddedInterest,2);
     $discount = (($futurePrice - $cashPrice) / $futurePrice) * 100;
     $discount = numberToFixed($discount,2);
-    $appliedFactor = toFixed(calculateFactor($hasDownPayment,$numInstallment,$financingCoefficient,$interestRate),6);
+    $appliedFactor = toString(calculateFactor($hasDownPayment,$numInstallment,$financingCoefficient,$interestRate),6);
     $financingCoefficient = numberToFixed($financingCoefficient,6);
     return "
     <p><b>Prestação:</b> $ {$pmt}</p>
