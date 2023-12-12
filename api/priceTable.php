@@ -8,12 +8,12 @@ function getLeftBoxHTMLText(float $cashPrice,float $futurePrice,int $numInstallm
     $numInstallmentTemp = (int) $numInstallment;
     $monthsToBackTemp = (int) $monthsToBack;
     $interestRateTemp = numberToFixed((float) $interestRate,4);
-    $annualInterestRate = convertMonthlyInterestToAnnual($interestRate);
+    $annualInterestRate = convertMonthlyToAnnualInterestRate($interestRate);
 
-    $financingCoefficient = calculateFinancingCoefficient($interestRate,$numInstallment);
+    $financingCoefficient = getFinancingCoefficient($interestRate,$numInstallment);
 
-    $pmt = numberToFixed(getPMT($cashPrice,$financingCoefficient), 2);
-    $valueToReturn = numberToFixed(calculateValueToReturn($pmt,$numInstallmentTemp,$monthsToBackTemp), 2);
+    $pmt = numberToFixed(calculatePaymentAmount($cashPrice,$financingCoefficient), 2);
+    $valueToReturn = numberToFixed(getValueToReturn($pmt,$numInstallmentTemp,$monthsToBackTemp), 2);
 
     $textInstallment = $hasDownPayment ? " (+ 1)": "";
     $textHasDownPayment = $hasDownPayment ? "Sim" : "Não";
@@ -40,17 +40,17 @@ function getRightBoxHTMLText(float $cashPrice, float $futurePrice, int $numInsta
     $realInterestRate = calculateInterestRate($cashPrice,$futurePrice, $numInstallment,$hasDownPayment) * 100;
 
     
-    $financingCoefficient = calculateFinancingCoefficient($interestRate,$numInstallment);
+    $financingCoefficient = getFinancingCoefficient($interestRate,$numInstallment);
 
     $realInterestRate = numberToFixed($realInterestRate,4);
  
-    $pmt = toFixed(getPMT($cashPrice,$financingCoefficient),2);
+    $pmt = toString(calculatePaymentAmount($cashPrice,$financingCoefficient),2);
  
     $embeddedInterest = (($futurePrice - $cashPrice) / $cashPrice) * 100;
     $embeddedInterest = numberToFixed($embeddedInterest,2);
     $discount = (($futurePrice - $cashPrice) / $futurePrice) * 100;
     $discount = numberToFixed($discount,2);
-    $appliedFactor = toFixed(calculateAppliedFactor($hasDownPayment,$numInstallment,$financingCoefficient,$interestRate),6);
+    $appliedFactor = toFixed(calculateFactor($hasDownPayment,$numInstallment,$financingCoefficient,$interestRate),6);
     $financingCoefficient = numberToFixed($financingCoefficient,6);
     return "
     <p><b>Prestação:</b> $ {$pmt}</p>
@@ -236,12 +236,12 @@ if($interestRate != 0 && $finalValue == 0){
 }
 
 
-$financingCoefficient = calculateFinancingCoefficient($interestRate, $numInstallment);
+$financingCoefficient = getFinancingCoefficient($interestRate,$numInstallment);
 
 if( $finalValue == 0){
-    $finalValue = futureValue($financingCoefficient,$interestRate,$presentValue,$numInstallment,$hasDownPayment);
+    $finalValue = calculateFinalValue($financingCoefficient,$interestRate,$presentValue,$numInstallment,$hasDownPayment);
 } 
-$pmt = getPMT($presentValue,$financingCoefficient);
+$pmt = calculatePaymentAmount($cashPrice,$financingCoefficient);
 
 if($hasDownPayment){
     $pmt /= 1 + $interestRate;
@@ -251,9 +251,10 @@ if($hasDownPayment){
     
 }
 
-$priceTable = getPriceTable($presentValue,$pmt,$numInstallment,$interestRate,$hasDownPayment);
+$priceTable = buildPriceTable($presentValue,$pmt,$numInstallment,$interestRate,$hasDownPayment);
 
-$valorCorrigido = getAdjustedValue($priceTable,$numInstallment,$monthsToBack);
+$valueToReturn = getValueToReturn($pmt,$numInstallmentTemp,$monthsToBackTemp);
+$valorCorrigido = calculateBackedValue($monthsToBack, $valueToReturn, $interestRate);
 
 $priceTableText =  getPriceTableHTMLText($priceTable);
 
