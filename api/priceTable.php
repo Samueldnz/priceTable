@@ -253,7 +253,7 @@ if($hasDownPayment){
 
 $priceTable = buildPriceTable($presentValue,$pmt,$numInstallment,$interestRate,$hasDownPayment);
 
-$valueToReturn = getValueToReturn($pmt,$numInstallmentTemp,$monthsToBackTemp);
+$valueToReturn = getValueToReturn($pmt,$numInstallment,$monthsToBack);
 $valorCorrigido = calculateBackedValue($monthsToBack, $valueToReturn, $interestRate);
 
 $priceTableText =  getPriceTableHTMLText($priceTable);
