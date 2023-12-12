@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-require 'cdcFunctions.php';
+require 'cdcFunction.php';
 
 function getLeftBoxHTMLText(float $cashPrice,float $futurePrice,int $numInstallment,float $interestRate,bool $hasDownPayment,int $monthsToBack):string{
     $futurePriceTemp = numberToFixed((float) $futurePrice,2);
