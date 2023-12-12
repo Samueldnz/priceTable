@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-require 'cdcFunctions.php';
+require 'cdcFunction.php';
 
 function buildTableHTML(array $priceTable): string {
     $table = "";
