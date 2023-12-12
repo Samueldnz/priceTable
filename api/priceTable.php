@@ -241,7 +241,7 @@ $financingCoefficient = getFinancingCoefficient($interestRate,$numInstallment);
 if( $finalValue == 0){
     $finalValue = calculateFinalValue($financingCoefficient,$interestRate,$presentValue,$numInstallment,$hasDownPayment);
 } 
-$pmt = calculatePaymentAmount($cashPrice,$financingCoefficient);
+$pmt = calculatePaymentAmount($presentValue,$financingCoefficient);
 
 if($hasDownPayment){
     $pmt /= 1 + $interestRate;
