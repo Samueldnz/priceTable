@@ -190,7 +190,7 @@ function buildPriceTable(
     float $paymentAmount,
     int $numberOfInstallments,
     float $interestRate,
-    bool $hasDownPayment):float
+    bool $hasDownPayment):array
 {
     $totalAcumulateInterest = 0;
     $totalAmortization = 0;
