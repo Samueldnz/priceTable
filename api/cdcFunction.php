@@ -158,7 +158,7 @@ function getFinancingCoefficient(
 
 function convertMonthlyToAnnualInterestRate(float $interest): float 
 {
-    $decimalRate = $interest/100;
+    $decimalRate = $interest/=100;
     $result = (pow(1 + $decimalRate, 12) - 1) * 100;
 
     return numberToFixed($result, 2);
