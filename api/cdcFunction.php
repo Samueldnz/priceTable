@@ -122,8 +122,7 @@ function calculateFinalValue(
 {
     $result = $presentValue / calculateFactor($hasDownPayment, $numberOfInstallments, $financingCoefficient, $interestRate);
 
-    return numberToFixed($res
-    ult, 2);
+    return numberToFixed($result, 2);
 }
 
 function getPresentValue(
