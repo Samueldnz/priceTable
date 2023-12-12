@@ -208,7 +208,7 @@ function buildPriceTable(
     $amortization = 0;
     $outstandingBalance = $presentValue;
 
-    for($i = 1; $i <= $numberOfInstallments; i++){
+    for($i = 1; $i <= $numberOfInstallments; $i++){
         $interestValue = $outstandingBalance*$interestRate;
 
         $amortization = $paymentAmount - $interestValue;
